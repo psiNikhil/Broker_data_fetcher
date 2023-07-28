@@ -70,7 +70,7 @@ def on_connect(client, userdata, flags, rc):
 
 def on_message(client, userdata, message):
             # Handle the incoming MQTT message here and create/update the AutoDiscoveries instance
-            discovery = AutoDiscoveries.from_mqtt_message(message)
+            discovery = dataBases.AutoDiscoveries.from_mqtt_message(message)
             # Now you can use 'discovery' instance with the received data
             print("Received data for id:", discovery.id)
             print("MQTT ID:", discovery.mqtt_id)
@@ -111,7 +111,7 @@ def on_message(client, userdata, message):
             discovery.add_extra_columns_to_df(df)
             # Now you have a DataFrame containing the received data
             'print(df)'
-    # Create the 'data' instance as a global variable
+        # Create the 'data' instance as a global variable
 data = dataBases.AutoDiscoveries()
 # Configure the MQTT client and callbacks
 client = mqtt.Client()
@@ -125,6 +125,7 @@ client.connect(broker_address, broker_port, 60)
 
 # Start the MQTT client's network loop
 client.loop_forever()
+
 
   
 
